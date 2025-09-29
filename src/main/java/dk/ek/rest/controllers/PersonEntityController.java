@@ -89,7 +89,7 @@ public class PersonEntityController implements IController {
     }
     public Handler resetData(){
         return ctx -> {
-            new Populator().createUsersAndRoles(HibernateConfig.getEntityManagerFactory());
+//            new Populator().createUsersAndRoles(HibernateConfig.getEntityManagerFactory());
             new Populator().createPersonEntities(HibernateConfig.getEntityManagerFactory());
             ctx.json(new ObjectMapper().createObjectNode().put("message", "Data reset"));
         };

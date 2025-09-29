@@ -2,11 +2,6 @@ package dk.ek.daos;
 
 import dk.ek.persistence.daos.PersonDAO;
 import dk.ek.persistence.model.*;
-import dk.ek.security.ISecurityController;
-import dk.ek.security.ISecurityDAO;
-import dk.ek.security.SecurityController;
-import dk.ek.security.SecurityDAO;
-import dk.ek.security.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import dk.ek.persistence.HibernateConfig;
 import org.junit.jupiter.api.*;
@@ -20,11 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DAOTest {
     private static EntityManagerFactory emf;
     private static PersonDAO personDao;
-    private static ISecurityDAO securityDAO;
-    private static ISecurityController securityController;
 
     Person p1, p2, p3;
-    User user, admin, superUser = null;
 
 
     @BeforeAll
@@ -32,9 +24,7 @@ class DAOTest {
         HibernateConfig.setTestMode(true);
         emf = HibernateConfig.getEntityManagerFactory();
         personDao = new PersonDAO(emf);
-        securityDAO = new SecurityDAO(emf);
 
-        securityController = SecurityController.getInstance();
     }
 
     @AfterAll
@@ -46,7 +36,7 @@ class DAOTest {
     void setUp() {
         TestUtils utils = new TestUtils();
         // Create 3 users and 2 roles: user, admin and super and user and admin roles
-        utils.createUsersAndRoles(emf);
+//        utils.createUsersAndRoles(emf);
         // Populate the persons with addresses, Phone and Hobbies
         Map<String, Person> populated = utils.createPersonEntities(emf);
         p1 = (Person) populated.get("Person1");

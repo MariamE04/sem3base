@@ -1,6 +1,6 @@
 package dk.ek.rest;
 
-import dk.ek.security.SecurityRoutes;
+//import dk.ek.security.SecurityRoutes;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.path;
@@ -16,16 +16,16 @@ import static io.javalin.apibuilder.ApiBuilder.path;
  *
  * Author: Thomas Hartmann
  */
-public class P08All {
+public class Main {
 
 //    private static IController personController = PersonEntityController.getInstance();
     public static void main(String[] args) {
         ApplicationConfig
             .getInstance()
             .initiateServer()
-            .checkSecurityRoles() // check for role when route is called
-            .setRoute(SecurityRoutes.getSecurityRoutes())
-            .setRoute(SecurityRoutes.getSecuredRoutes())
+//            .checkSecurityRoles() // check for role when route is called
+//            .setRoute(SecurityRoutes.getSecurityRoutes())
+//            .setRoute(SecurityRoutes.getSecuredRoutes())
             .setRoute(new RestRoutes().getOpenRoutes())
             .setRoute(new RestRoutes().personEntityRoutes) // A different way to get the EndpointGroup.
                 .setRoute(()->{
@@ -36,8 +36,6 @@ public class P08All {
             .startServer(7007)
             .setCORS()
             .setGeneralExceptionHandling();
-//            .setErrorHandling()
-//            .setApiExceptionHandling();
     }
 
 }

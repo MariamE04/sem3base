@@ -10,7 +10,6 @@ import dk.ek.persistence.model.Person;
 import dk.ek.rest.ApplicationConfig;
 import dk.ek.rest.RestRoutes;
 import dk.ek.rest.controllers.PersonController;
-import dk.ek.security.SecurityRoutes;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -62,12 +61,12 @@ class PersonHandlerTest {
         appConfig = ApplicationConfig.
                 getInstance()
                 .initiateServer()
-                .checkSecurityRoles()
+//                .checkSecurityRoles()
 //                .setErrorHandling() // This one overrules the setApiExeptionHandling
                 .setGeneralExceptionHandling()
                 .setRoute(restRoutes.getOpenRoutes())
-                .setRoute(SecurityRoutes.getSecurityRoutes())
-                .setRoute(SecurityRoutes.getSecuredRoutes())
+//                .setRoute(SecurityRoutes.getSecurityRoutes())
+//                .setRoute(SecurityRoutes.getSecuredRoutes())
                 .setRoute(restRoutes.personEntityRoutes) // A different way to get the EndpointGroup. Getting data from DB
                 .setCORS()
 //                .setApiExceptionHandling()
@@ -84,7 +83,7 @@ class PersonHandlerTest {
     @BeforeEach
     void setUpEach() {
         // Setup test database for each test
-        new TestUtils().createUsersAndRoles(emfTest);
+//        new TestUtils().createUsersAndRoles(emfTest);
         // Setup DB Persons and Addresses
         entities = new TestUtils().createPersonEntities(emfTest);
         simplePersons = PersonController.getCollection();

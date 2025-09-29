@@ -1,0 +1,49 @@
+<configuration>
+
+    <property name="HOME_LOG" value="logs/app.log"/>
+    <property name="ERROR_COLOR" value="\u001B[31m" />    <!-- Red for ERROR -->
+    <property name="WARN_COLOR" value="\u001B[33m" />     <!-- Yellow for WARN -->
+    <property name="INFO_COLOR" value="\u001B[32m" />     <!-- Green for INFO -->
+    <property name="DEBUG_COLOR" value="\u001B[34m" />    <!-- Blue for DEBUG -->
+    <property name="TRACE_COLOR" value="\u001B[36m" />    <!-- Cyan for TRACE -->
+    <property name="RESET" value="\u001B[0m" />          <!-- Reset color -->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>
+<!--                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %highlight(%-40.40logger{39}) - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${HOME_LOG}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
+            <totalSizeCap>100MB</totalSizeCap>
+<!--            <totalSizeCap>20GB</totalSizeCap>-->
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <!--            https://logback.qos.ch/manual/layouts.html                    -->
+            <pattern>%date{HH:mm:ss.SSS} [%thread] log-level=%-5level %logger{36}  %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="dk.ek" level="debug" additivity="false">
+        <appender-ref ref="FILE-ROLLING"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="FILE-ROLLING"/>
+    </root>
+
+</configuration>

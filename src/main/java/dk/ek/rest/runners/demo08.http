@@ -1,0 +1,68 @@
+### REQUEST DEMOS ###
+GET http://{{url}}/context_request_demo
+
+###
+GET http://{{url}}/context_request_demo/pathparam/ThomasHartmann
+
+###
+GET http://{{url}}/context_request_demo/queryparam?qp=MyQueryParam
+
+###
+GET http://{{url}}/context_request_demo/header
+X-EXAMPLE-HEADER: MyHeaderValue
+
+###
+GET http://{{url}}/context_request_demo/req
+
+### RESPONSE DEMOS ###
+GET http://{{url}}/context_response_demo/contenttype
+
+### Check the header ouput:
+GET http://{{url}}/context_response_demo/header
+### Check the response status: I'm a teapot
+GET http://{{url}}/context_response_demo/status
+###
+GET http://{{url}}/context_response_demo/json
+###
+GET http://{{url}}/context_response_demo/html
+### Use JTE TEMPLATES: https://javalin.io/tutorials/jte
+GET http://{{url}}/context_response_demo/render
+### Full CRUD example ###
+GET http://localhost:7007/api/person2
+###
+GET http://{{url}}/person/
+###
+GET http://{{url}}/person/name/Thomas
+###
+GET http://localhost:7007/demoapp/api/context_response_demo/header
+###
+POST http://{{url}}/auth/register
+
+{
+    "username": "user6",
+    "password": "test123"
+}
+###
+POST http://{{url}}/auth/login
+
+{
+    "username": "user6",
+    "password": "test1234"
+}
+> {%
+ client.global.set("token", response.body.token);
+%}
+
+###
+POST http://{{url}}/person
+Authorization: Bearer {{token}}
+
+{
+         "firstName": "Thomas",
+         "lastName": "Hartmann",
+         "email": "thomas@mail.com",
+         "birthDate": "1980-01-01",
+}
+###
+GET http://{{url}}/api/person/1
+Content-Type: application/json

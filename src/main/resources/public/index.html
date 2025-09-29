@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>API Documentation</h2>
+
+<table>
+    <tr>
+        <th>HTTP Method & URL Path</th>
+        <th>Response</th>
+        <th>Request Body (JSON)</th>
+    </tr>
+
+    <!-- GET All Persons -->
+    <tr>
+        <td>GET /open/person/</td>
+        <td>
+                <pre>
+[
+  {
+    "id": "UUID",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "birthday": "yyyy-mm-dd",
+    "jobTitle": "string"
+  },
+  // Additional Person objects as needed
+]
+                </pre>
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- GET Person by ID -->
+    <tr>
+        <td>GET /open/person/{id}</td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- GET Person by Email -->
+    <tr>
+        <td>GET /open/person/email/{email}</td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- Create Person -->
+    <tr>
+        <td>POST /open/person/</td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+    </tr>
+
+    <!-- Update Person by ID -->
+    <tr>
+        <td>PUT /open/person/{id}</td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+    </tr>
+
+    <!-- Delete Person by ID -->
+    <tr>
+        <td>DELETE /open/person/{id}</td>
+        <td>
+                <pre>
+{
+  "id": "UUID",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "birthday": "yyyy-mm-dd",
+  "jobTitle": "string"
+}
+                </pre>
+        </td>
+        <td></td>
+    </tr>
+    <tr><td><b>Here comes another group of endpoints using the database. <br/>POST, PUT and DELETE are protected with admin rights</b></td></tr>
+    <!-- GET All Person Entities -->
+    <tr>
+        <td>GET /person/</td>
+        <td>
+        <pre>
+[
+  {
+    "id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phones": [
+      {
+        "number": "string",
+        "description": "string"
+      },
+      // Additional PhoneDTO objects as needed
+    ],
+    "birthDate": "yyyy-mm-dd",
+    "address": "string",
+    "hobbies": [
+      "string",
+      // Additional hobbies as needed
+    ]
+  },
+  // Additional Person objects as needed
+]
+        </pre>
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- GET Person Entity by ID -->
+    <tr>
+        <td>GET /person/{id}</td>
+        <td>
+        <pre>
+{
+  "id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phones": [
+    {
+      "number": "string",
+      "description": "string"
+    },
+    // Additional PhoneDTO objects as needed
+  ],
+  "birthDate": "yyyy-mm-dd",
+  "address": "string",
+  "hobbies": [
+    "string",
+    // Additional hobbies as needed
+  ]
+}
+        </pre>
+        </td>
+        <td></td>
+    </tr>
+
+    <!-- Reset Data Endpoint -->
+    <tr>
+        <td>GET /person/resetdata</td>
+        <td>void</td>
+        <td></td>
+    </tr>
+
+    <!-- Create Person Entity -->
+    <tr>
+        <td>POST /person/ [Protected]</td>
+        <td>
+        <pre>
+{
+  "id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phones": [
+    {
+      "number": "string",
+      "description": "string"
+    },
+    // Additional PhoneDTO objects as needed
+  ],
+  "birthDate": "yyyy-mm-dd",
+  "address": "string",
+  "hobbies": [
+    "string",
+    // Additional hobbies as needed
+  ]
+}
+        </pre>
+        </td>
+        <td>
+        <pre>
+{
+  "id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phones": [
+    {
+      "number": "string",
+      "description": "string"
+    },
+    // Additional PhoneDTO objects as needed
+  ],
+  "birthDate": "yyyy-mm-dd",
+  "address": "string",
+  "hobbies": [
+    "string",
+    // Additional hobbies as needed
+  ]
+}
+        </pre>
+        </td>
+    </tr>
+
+    <!-- Update Person Entity by ID -->
+    <tr>
+        <td>PUT /person/{id} [Protected]</td>
+        <td>
+        <pre>
+{
+  "id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phones": [
+    {
+      "number": "string",
+      "description": "string"
+    },
+    // Additional PhoneDTO objects as needed
+  ],
+  "birthDate": "yyyy-mm-dd",
+  "address": "string",
+  "hobbies": [
+    "string",
+    // Additional hobbies as needed
+  ]
+}
+        </pre>
+        </td>
+        <td>
+        <pre>
+{
+  "id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "phones": [
+    {
+      "number": "string",
+      "description": "string"
+    },
+    // Additional PhoneDTO objects as needed
+  ],
+  "birthDate": "yyyy-mm-dd",
+  "address": "string",
+  "hobbies": [
+    "string",
+    // Additional hobbies as needed
+  ]
+}
+        </pre>
+        </td>
+    </tr>
+
+    <!-- Delete Person Entity by ID -->
+    <tr>
+        <td>DELETE /person/{id} [Protected]</td>
+        <td>void</td>
+        <td></td>
+    </tr>
+    <!-- Connect Person to Address -->
+    <tr>
+        <td>POST /person/connect/address/{personId}/{addressId} [Protected]</td>
+        <td>void</td>
+        <td></td>
+    </tr>
+
+    <!-- Connect Person to Phone -->
+    <tr>
+        <td>POST /person/connect/phone/{personId}/{phoneId} [Protected]</td>
+        <td>void</td>
+        <td></td>
+    </tr>
+
+    <!-- Connect Person to Hobby -->
+    <tr>
+        <td>POST /person/connect/hobby/{personId}/{hobbyId} [Protected]</td>
+        <td>void</td>
+        <td></td>
+    </tr>
+
+
+</table>
+
+</body>
+
+</html>

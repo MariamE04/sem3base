@@ -1,0 +1,30 @@
+POST http://{{url}}/auth/register
+
+{
+    "username": "thomas",
+    "password": "test123"
+}
+###
+POST http://{{url}}/auth/login
+
+{
+    "username": "thomas",
+    "password": "test123"
+}
+> {%
+ client.global.set("token", response.body.token);
+%}
+
+###
+POST http://{{url}}/person
+Authorization: Bearer {{token}}
+
+
+{
+         "firstName": "Thomas",
+         "lastName": "Hartmann",
+         "email": "thomas@mail.com",
+         "birthDate": "1980-01-01",
+}
+###
+GET http://{{url}}/person/1

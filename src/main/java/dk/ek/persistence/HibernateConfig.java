@@ -4,6 +4,8 @@ import dk.ek.persistence.model.*;
 //import dk.ek.security.entities.Role;
 //import dk.ek.security.entities.User;
 import dk.ek.utils.Utils;
+import dk.security.Role;
+import dk.security.User;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -36,9 +38,9 @@ public class HibernateConfig {
     }
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration) {
-//        configuration.addAnnotatedClass(User.class);
-//        configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(Role.class);
         configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(User.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {
@@ -76,7 +78,7 @@ public class HibernateConfig {
     private static Properties setBaseProperties(Properties props){
         props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         props.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-        props.put("hibernate.hbm2ddl.auto", "update");
+        props.put("hibernate.hbm2ddl.auto", "create");
         props.put("hibernate.current_session_context_class", "thread");
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
@@ -92,8 +94,8 @@ public class HibernateConfig {
     }
     private static Properties setDevProperties(Properties props){
         props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/"+ getDBName());
-        props.put("hibernate.connection.username", "dev");
-        props.put("hibernate.connection.password", "ax2");
+        props.put("hibernate.connection.username", "postgres");
+        props.put("hibernate.connection.password", "postgres");
         return props;
     }
     private static Properties setTestProperties(Properties props){

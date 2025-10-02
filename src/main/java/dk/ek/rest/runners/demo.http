@@ -39,7 +39,7 @@ GET http://localhost:7007/demoapp/api/context_response_demo/header
 POST http://{{url}}/auth/login
 
 {
-    "username": "user1",
-    "password": "pass123"
+    "username": "user2",
+    "password": "pass124"
 }
 

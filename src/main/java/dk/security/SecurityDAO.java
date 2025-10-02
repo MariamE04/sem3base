@@ -71,7 +71,6 @@ public class SecurityDAO implements ISecurityDAO{
 
     public static void main(String[] args) throws EntityNotFoundException {
         ISecurityDAO dao= new SecurityDAO(HibernateConfig.getEntityManagerFactory());
-        dao.createUser("user1", "pass123");
         dao.createUser("user2", "pass124");
         dao.createRole("User");
         dao.addUserRole("user2", "User");

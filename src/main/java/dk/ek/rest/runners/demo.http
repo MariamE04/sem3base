@@ -43,3 +43,7 @@ POST http://{{url}}/auth/login
     "password": "pass124"
 }
 
+###
+
+GET http://{{url}}/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcIk1hcmlhbSBFbG1pclwiIiwic3ViIjoidXNlcjIiLCJleHAiOjE3NTkzOTk1NTgsInJvbGVzIjoiVXNlciIsInVzZXJuYW1lIjoidXNlcjIifQ.CmO2Poe71Q_oSQAHkxekMUcVKHrWnz7Gv52aHSbNjWA

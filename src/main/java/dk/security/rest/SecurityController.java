@@ -12,10 +12,7 @@ import dk.ek.utils.Utils;
 import dk.security.ISecurityDAO;
 import dk.security.SecurityDAO;
 import dk.security.User;
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
-import io.javalin.http.UnauthorizedResponse;
+import io.javalin.http.*;
 
 import java.text.ParseException;
 import java.util.Set;
@@ -80,13 +77,27 @@ public class SecurityController implements ISecurityController{
 
     @Override
     public Handler authorize() {
-        return null;
-    }
+        return (Context ctx) -> {
+        Set<String> allowedRoles = ctx.routeRoles()
+                .stream()
+                .map(role -> role.toString().toUpperCase())
+                .collect(Collectors.toSet());
 
-    /*@Override
-    public boolean authorize(UserDTO userDTO, Set<String> allowedRoles) {
-        return false;
-    }*/
+        // 1. Check if the endpoint is open to all (either by not having any roles or having the ANYONE role set
+        if (isOpenEndpoint(allowedRoles))
+            return;
+        // 2. Get user and ensure it is not null
+        UserDTO user = ctx.attribute("user");
+        if (user == null) {
+            throw new ForbiddenResponse("No user was added from the token");
+        }
+        // 3. See if any role matches
+        if (!userHasAllowedRole(user, allowedRoles))
+            throw new ForbiddenResponse("User was not authorized with roles: " + user.getRoles() + ". Needed roles are: " + allowedRoles);
+    };
+
+}
+
 
     @Override
     public String createToken(UserDTO user) throws Exception {
@@ -163,4 +174,10 @@ public class SecurityController implements ISecurityController{
         }
         return false;
     }
+
+    private static boolean userHasAllowedRole(UserDTO user, Set<String> allowedRoles) {
+        return user.getRoles().stream()
+                .anyMatch(role -> allowedRoles.contains(role.toUpperCase()));
+    }
+
 }
